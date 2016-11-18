@@ -3,6 +3,7 @@ MAINTAINER wusuopu <admin@longchangjin.cn>
 
 RUN ln -s /root/torch/install/bin/* /usr/local/bin
 
+RUN apt-get update
 RUN apt-get install -y \
     curl \
     git \
@@ -18,8 +19,8 @@ RUN apt-get install -y \
     zip \
     qt5-default \
     libqt5svg5-dev \
-    qtcreator
-    && apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+    qtcreator && \
+    apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 RUN git clone https://github.com/biometrics/openbr.git && \
       cd openbr && \
