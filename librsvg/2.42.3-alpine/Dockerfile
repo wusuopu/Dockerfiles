@@ -1,8 +1,8 @@
 FROM alpine:3.7
 
 WORKDIR /app
-RUN apk --no-cache add --virtual .build-deps build-base automake autoconf gtk-doc rust cargo && \
-    apk --no-cache add freetype-dev libxml2-dev libart-lgpl-dev pango-dev gdk-pixbuf-dev libcroco-dev gobject-introspection-dev glib-dev gi
+RUN apk --no-cache add --virtual .build-deps build-base automake autoconf gtk-doc rust cargo git && \
+    apk --no-cache add freetype-dev libxml2-dev libart-lgpl-dev pango-dev gdk-pixbuf-dev libcroco-dev gobject-introspection-dev glib-dev
 
 RUN git clone --depth 1 -n -b 1.15.10 git://anongit.freedesktop.org/git/cairo && \
     cd cairo && \
