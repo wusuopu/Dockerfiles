@@ -1,4 +1,4 @@
-FROM alpine:3.7
+FROM alpine:3.9
 
 WORKDIR /app
 RUN apk --no-cache add --virtual .build-deps build-base automake autoconf gtk-doc rust cargo git && \
