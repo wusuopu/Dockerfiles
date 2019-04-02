@@ -7,7 +7,7 @@ RUN wget https://codeload.github.com/binux/yaaw/zip/master && \
     cp -r yaaw-master/* /usr/share/nginx/html && \
     rm -rf yaaw-master/
 
-COPY run.sh /run.sh
+COPY ./run.sh /run.sh
 
 EXPOSE 80
 
