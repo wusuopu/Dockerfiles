@@ -9,6 +9,7 @@ VOLUME /Downloads
 CMD [
   "aria2c",
   "--enable-rpc=true",
+  "--rpc-listen-port=6800",
   "--rpc-allow-origin-all=true",
   "--rpc-listen-all=true",
   "--max-concurrent-downloads=3",
