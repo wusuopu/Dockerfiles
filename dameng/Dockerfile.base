@@ -1,0 +1,7 @@
+FROM ubuntu:16.04
+
+COPY ./pkg /pkg
+
+RUN cd /pkg && \
+    chmod 755 DMInstall.bin && \
+    bash DMInstall.bin -q /pkg/install.xml
