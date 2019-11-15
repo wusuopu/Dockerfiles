@@ -4,4 +4,6 @@ COPY ./pkg /pkg
 
 RUN cd /pkg && \
     chmod 755 DMInstall.bin && \
-    bash DMInstall.bin -q /pkg/install.xml
+    bash DMInstall.bin -q /pkg/install.xml && \
+    echo /opt/dmdbms/bin >> /etc/ld.so.conf && \
+    ldconfig -v
