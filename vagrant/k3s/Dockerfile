@@ -20,9 +20,12 @@ RUN adduser -h /home/vagrant -s /bin/sh -D vagrant && \
     ssh-keygen -t rsa -f /etc/ssh/ssh_host_rsa_key -N ""
 
 RUN cp -v /usr/local/bin/dockerd-entrypoint.sh /usr/local/bin/dockerd-entrypoint.sh~ && \
-    sed -i '$ i\/usr/sbin/sshd -o PasswordAuthentication=yes' /usr/local/bin/dockerd-entrypoint.sh
+    sed -i '$ i\/usr/sbin/sshd -o PasswordAuthentication=yes' /usr/local/bin/dockerd-entrypoint.sh && \
+    sed -i '$ i\[ -f /vagrant/k3s-run.sh ] && /vagrant/k3s-run.sh' /usr/local/bin/dockerd-entrypoint.sh
 
-ENV PATH=/usr/share/cni-plugins/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+ENV PATH=/usr/share/cni-plugins/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin \
+    KUBE_MASTER_HOST_IP="" \
+    KUBE_NODE_NUM=""
 
 # k3s port
 EXPOSE 6443
