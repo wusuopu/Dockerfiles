@@ -23,3 +23,6 @@ RUN cp -v /usr/local/bin/dockerd-entrypoint.sh /usr/local/bin/dockerd-entrypoint
     sed -i '$ i\/usr/sbin/sshd -o PasswordAuthentication=yes' /usr/local/bin/dockerd-entrypoint.sh
 
 ENV PATH=/usr/share/cni-plugins/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+
+# k3s port
+EXPOSE 6443
