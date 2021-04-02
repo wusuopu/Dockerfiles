@@ -1,6 +1,6 @@
 FROM python:3.8.8-buster
 
-RUN apt-get update && apt-get install -y build-essential && apt-get clean
+RUN apt-get update && apt-get install -y build-essential locales && apt-get clean
 
 ARG VNPY_VERSION=2.2.0
 ARG GIT_MIRROR=github.com
@@ -21,6 +21,3 @@ EXPOSE 80
 ENV HTTP_PASSWORD="" \
     VNC_PASSWORD="" \
     RESOLUTION=""
-
-
-CMD []

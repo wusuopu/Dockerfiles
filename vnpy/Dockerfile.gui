@@ -1,6 +1,6 @@
 FROM dorowu/ubuntu-desktop-lxde-vnc:focal
 
-RUN apt-get update && apt-get install -y build-essential && apt-get clean
+RUN apt-get update && apt-get install -y build-essential locales python3-pip && apt-get clean
 
 ARG VNPY_VERSION=2.2.0
 ARG GIT_MIRROR=github.com
