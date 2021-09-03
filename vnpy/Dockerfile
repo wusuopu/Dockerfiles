@@ -17,7 +17,3 @@ RUN cd /root && \
 WORKDIR /root/vnpy
 
 EXPOSE 80
-
-ENV HTTP_PASSWORD="" \
-    VNC_PASSWORD="" \
-    RESOLUTION=""
