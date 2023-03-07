@@ -13,6 +13,7 @@ ENV MYSQL_HOST="" \
     MYSQL_USER="" \
     MYSQL_PASSWORD="" \
     MYSQL_DB="" \
+    MYSQL_DUMP_OPTIONS="" \
     ALI_ACCESS_KEY_ID="" \
     ALI_ACCESS_KEY_SECRET="" \
     ALI_REGION="" \

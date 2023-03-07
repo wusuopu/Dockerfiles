@@ -3,6 +3,7 @@
 
 import subprocess
 import os
+import sys
 import datetime
 import time
 import cron
@@ -13,12 +14,13 @@ def mysqldump(output):
     port = os.environ.get('MYSQL_PORT', '3306')
     user = os.environ.get('MYSQL_USER')
     password = os.environ.get('MYSQL_PASSWORD')
+    dump_options = os.environ.get('MYSQL_DUMP_OPTIONS') or ''
     db = os.environ.get('MYSQL_DB')
     if not host or not user or not password or not db:
         print('缺少 mysql 环境变量配置')
         exit(1)
-    cmd = 'mysqldump --host %s --port %s -u%s -p%s %s > %s' % (
-        host, port, user, password, db, output
+    cmd = 'mysqldump --host %s --port %s -u%s -p%s %s %s > %s' % (
+        host, port, user, password, dump_options, db, output
     )
     print(cmd)
     p = subprocess.Popen(
@@ -55,7 +57,7 @@ def upload(filename):
         exit(1)
 
     src_file = '%s.gz' % (filename)
-    dst_file = '/backup/db/%s' % (os.path.basename(filename))
+    dst_file = '/backup/db/%s.gz' % (os.path.basename(filename))
     cmd = 'ossutil64 cp %s oss://%s%s -c /tmp/oss-config' % (
         src_file, bucket, dst_file
     )
@@ -80,12 +82,7 @@ def run():
     upload(output)
 
 
-def main():
-    CRON = os.environ.get('CRON')
-    if not CRON:
-        print('miss CRON env')
-        return
-
+def run_schedule(CRON):
     while True:
         minutes = cron.diff(CRON)
         print('sleep: %s minutes' % (minutes))
@@ -93,6 +90,19 @@ def main():
         print('start task', datetime.datetime.now())
         run()
         time.sleep(60)
+
+
+def main():
+    if len(sys.argv) > 1 and sys.argv[1] == '--no-cron':
+        run()
+        return
+
+    CRON = os.environ.get('CRON')
+    if not CRON:
+        print('miss CRON env')
+        return
+
+    run_schedule(CRON)
 
 
 if __name__ == '__main__':
