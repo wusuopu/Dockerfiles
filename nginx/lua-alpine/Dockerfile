@@ -3,6 +3,7 @@ FROM alpine:3.6
 RUN apk add --no-cache nginx-mod-http-lua nginx-mod-http-geoip curl
 
 # download geoip database
+# https://www.miyuru.lk/geoiplegacy
 RUN curl -O http://geolite.maxmind.com/download/geoip/database/GeoLiteCountry/GeoIP.dat.gz
 RUN gunzip GeoIP.dat.gz
 RUN curl -O http://geolite.maxmind.com/download/geoip/database/GeoLiteCity.dat.gz
